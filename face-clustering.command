@@ -26,7 +26,7 @@ esac
 
 read -p "3. Install dependencies: y/n " yn
 case $yn in
-    [Yy]* ) conda create --name facial-clustering; conda install pip; pip install cmake face_recognition imutils scikit-learn argparse opencv-python; break;;
+    [Yy]* ) conda create --name face-clustering; conda install pip; pip install cmake face_recognition imutils scikit-learn argparse opencv-python; break;;
     [Nn]* ) break;;
     * ) echo "Please answer yes or no.";;
 esac

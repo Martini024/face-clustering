@@ -17,10 +17,10 @@ The model is developed in the python language.
 
 ## No-brainier Command Tool
 
-To make `facial-clustering.command` executable by double-clicking, run following command in terminal
+To make `face-clustering.command` executable by double-clicking, run following command in terminal
 
 ```bash
-chmod +x {path to facial-clustering.command}
+chmod +x {path to face-clustering.command}
 ```
 
 \>_> ok lor, double click, job done !!!
@@ -40,7 +40,7 @@ chmod +x {path to facial-clustering.command}
 - os
 
 ```
-conda create --name facial-clustering
+conda create --name face-clustering
 conda install pip
 pip install cmake face_recognition imutils scikit-learn argparse opencv-python 
 ```
