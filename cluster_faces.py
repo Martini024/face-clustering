@@ -18,6 +18,20 @@ from constants import CLUSTERING_RESULT_PATH, ENCODINGS_PATH, FACE_DATA_PATH
 # add constants file in the code (clustering_result)
 
 
+def promptForClearOutputFolder():
+    prompt = f'Following process will clear the contents in result folder, please ensure the folder is unused before proceeding, enter \"y\" to continue (y/n): '
+    answer = input(prompt).strip().lower()
+
+    if answer not in ['y', 'n']:
+        print(f'{answer} is an invalid choice, please select y/n')
+        return promptForClearOutputFolder()
+
+    if answer == 'y':
+        return True
+
+    return False
+
+
 def move_image(image, id, labelID):
 
     path = CLUSTERING_RESULT_PATH+'/label'+str(labelID)
@@ -34,6 +48,12 @@ def move_image(image, id, labelID):
 
     return
 
+
+promptForClearOutputFolder()
+if os.path.exists(CLUSTERING_RESULT_PATH):
+    shutil.rmtree(CLUSTERING_RESULT_PATH)
+os.makedirs(CLUSTERING_RESULT_PATH)
+os.makedirs(os.path.join(CLUSTERING_RESULT_PATH, "summary"))
 
 # construct the argument parser and parse the arguments
 ap = argparse.ArgumentParser()
@@ -58,7 +78,6 @@ print("[INFO] clustering...")
 clt = DBSCAN(metric="euclidean", n_jobs=args["jobs"])
 clt.fit(encodings)
 
-print(len(clt.labels_))
 # determine the total number of unique faces found in the dataset
 # clt.labels_ contains the label ID for all faces in our dataset (i.e., which cluster each face belongs to).
 # To find the unique faces/unique label IDs, used NumPy’s unique function.
@@ -109,4 +128,6 @@ for labelID in labelIDs:
 	cv2.imshow(title, montage)
 	cv2.waitKey(0)
 	"""
-    cv2.imwrite(os.path.join(CLUSTERING_RESULT_PATH, title+'.jpg'), montage)
+    montageFileName = os.path.join(
+        CLUSTERING_RESULT_PATH, 'summary', title + '.jpg')
+    cv2.imwrite(montageFileName, montage)

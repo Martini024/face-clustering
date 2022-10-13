@@ -15,6 +15,16 @@ From there we need to identify and count the number of unique people in a datase
 
 The model is developed in the python language.
 
+## No-brainier Command Tool
+
+To make `facial-clustering.command` executable by double-clicking, run following command in terminal
+
+```bash
+chmod +x {path to facial-clustering.command}
+```
+
+\>_> ok lor, double click, job done !!!
+
 ## Acknowledgement
 
 - @ageitgey for the face_recognition library
