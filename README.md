@@ -5,7 +5,7 @@ Clustering set of images based on the faces recognized using the DBSCAN clusteri
 Face recognition and face clustering are different. When performing face recognition we are applying *supervised learning* where we have both
 
 - example images of faces we want to recognize along with
-- the names that correspond to each face (i.e., the “class labels”).
+- the names that correspond to each face (i.e., the "class labels").
 
 But in face clustering we need to perform *unsupervised learning* — we have only the faces themselves with no names/labels.
 From there we need to identify and count the number of unique people in a dataset.
@@ -23,12 +23,10 @@ To make `face-clustering.command` executable by double-clicking, run following c
 chmod +x {path to face-clustering.command}
 ```
 
+If `"face-clustering.command" cannot be opened because it is from an unidentified developer.` comes out, go to System Preference -> Security & Privacy -> General -> Open Anyway
+
 \>_> ok lor, double click, job done !!!
 
-## Acknowledgement
-
-- @ageitgey for the face_recognition library
-  
 ## Dependencies
 
 - face_recognition
@@ -40,12 +38,19 @@ chmod +x {path to face-clustering.command}
 - os
 
 ```
+<!-- Install Anaconda using Homebrew -->
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+brew install --cask anaconda
+```
+
+```
+<!-- Create face-clustering using Anaconda, and resolve dependencies -->
 conda create --name face-clustering
 conda install pip
 pip install cmake face_recognition imutils scikit-learn argparse opencv-python 
 ```
 
-# encode_images.py
+## encode_images.py
 
 encode_faces.py script will contains code used to extract a 128-d feature vector representation for each face.
 
@@ -68,7 +73,7 @@ encode_faces.py script will contains code used to extract a 128-d feature vector
 **Usage - To run**
 $python encode_faces.py --dataset dataset --encodings encodings.pickle --detection_method "cnn"
 
-# cluster_faces.py
+## cluster_faces.py
 
 we have quantified and encoded all faces in our dataset as 128-d vectors, the next step is to cluster them into groups.
 *Our hope is that each unique individual person will have their own separate cluster*
@@ -94,6 +99,11 @@ Therefore, we need to use a density-based or graph-based clustering algorithm
 **To run**
 $python cluster_faces.py --encodings encodings.pickle --jobs -1
 
-# Application
+## Application
 
 This can be used to cluster out the gallery in mobile applications or any other application with large number of images which makes the operation inefficient for humans.
+
+## Acknowledgement
+
+- @ageitgey for the face_recognition library
+  
