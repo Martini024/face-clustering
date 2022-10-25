@@ -1,4 +1,4 @@
-echo "\033[0;36m
+echo "
   __           _       _            _           _            _             
  / _|         (_)     | |          | |         | |          (_)            
 | |_ __ _  ___ _  __ _| |______ ___| |_   _ ___| |_ ___ _ __ _ _ __   __ _ 
@@ -6,10 +6,10 @@ echo "\033[0;36m
 | || (_| | (__| | (_| | |     | (__| | |_| \__ \ ||  __/ |  | | | | | (_| |
 |_| \__,_|\___|_|\__,_|_|      \___|_|\__,_|___/\__\___|_|  |_|_| |_|\__, |
                                                                       __/ |
-                                                                     |___/ \033[0m
+                                                                     |___/
 "
 
-echo "Note: image with many faces will prolong the recognition process, \n      remove them if you don't wanna torture yourself\n"
+echo "Note: image with many faces will prolong the recognition process, remove them if you don't wanna torture yourself"
 
 read -p "1. Where is the dataset folder (default in dataset): " dataset
 if [[ -z "$var" ]]; then
@@ -17,32 +17,23 @@ if [[ -z "$var" ]]; then
 fi
 echo "   Target dataset folder: $dataset"
 
-read -p "2. Install Anaconda (using Homebrew): y/n " yn
-case $yn in
-    [Yy]* ) brew install --cask anaconda; break;;
-    [Nn]* ) break;;
-    * ) echo "Please answer yes or no.";;
-esac
-
 find_in_conda_env(){
     conda env list | grep "${@}" >/dev/null 2>/dev/null
 }
 
-read -p "3. Install dependencies: y/n " yn
+read -p "2. Install dependencies: y/n " yn
 case $yn in
-    [Yy]* ) if find_in_conda_env ".*face-clustering.*" ; then
-                source ~/anaconda3/etc/profile.d/conda.sh
+    [Yy]* ) if find_in_conda_env ".*face-clustering.*" ; then 
                 conda activate face-clustering
             else 
                 conda create --name face-clustering 
             fi
             conda install pip
             pip install cmake
-            pip install dlib face_recognition imutils scikit-learn argparse 
+            pip install dlib face_recognition imutils scikit-learn argparse
             pip install opencv-python
             ;;
-    [Nn]* ) if find_in_conda_env ".*face-clustering.*" ; then
-                source ~/anaconda3/etc/profile.d/conda.sh
+    [Nn]* ) if find_in_conda_env ".*face-clustering.*" ; then 
                 conda activate face-clustering
             else 
                 conda create --name face-clustering 
@@ -54,11 +45,16 @@ esac
 echo ""
 
 cd "$(dirname "$0")"
-echo "\033[0;32mStart extracting faces, please be patient...\033[0m\n"
+echo "Start extracting faces, please be patient..."
 
 python encode_faces.py --dataset $dataset --encodings encodings.pickle
 
 echo ""
 
-echo "\033[0;32mClustering...\033[0m\n"
+echo "Clustering..."
 python cluster_faces.py --encodings encodings.pickle --jobs -1
+
+read -p "[Completed]" yn
+case $yn in
+    * ) break;;
+esac

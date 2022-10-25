@@ -15,7 +15,40 @@ From there we need to identify and count the number of unique people in a datase
 
 The model is developed in the python language.
 
-## No-brainier Command Tool
+## Dependencies
+
+- face_recognition
+- imutils
+- sklearn.cluster
+- argparse
+- pickle
+- openCV (cv2)
+- os
+
+## Quickstart
+
+### MacOS
+
+#### Option 1: Run using Terminal
+
+1. Restore dependencies using following commands
+
+    ```
+    <!-- Install Anaconda using Homebrew -->
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    brew install --cask anaconda
+    ```
+
+    ```
+    <!-- Create face-clustering using Anaconda, and resolve dependencies -->
+    conda create --name face-clustering
+    conda install pip
+    pip install cmake face_recognition imutils scikit-learn argparse opencv-python 
+    ```
+
+2. Check the following sections about `encode_images.py` & `cluster_faces.py` to run the clustering algorithm
+
+#### Option 2: No-brainier Command Tool
 
 To make `face-clustering.command` executable by double-clicking, run following command in terminal
 
@@ -27,28 +60,20 @@ If `"face-clustering.command" cannot be opened because it is from an unidentifie
 
 \>_> ok lor, double click, job done !!!
 
-## Dependencies
+### Windows
 
-- face_recognition
-- imutils
-- sklearn.cluster
-- argparse
-- pickle
-- openCV (cv2)
-- os
+1. Follow the guide to install Anaconda on Windows [:link:](https://conda.io/projects/conda/en/latest/user-guide/install/windows.html)
+2. Follow the guide to install Git on Windows [:link:](https://git-scm.com/download/win)
 
-```
-<!-- Install Anaconda using Homebrew -->
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-brew install --cask anaconda
-```
+3. Paste following command to `~/.bash_profile` and adjust the path to `conda.exe` according to your directories
 
-```
-<!-- Create face-clustering using Anaconda, and resolve dependencies -->
-conda create --name face-clustering
-conda install pip
-pip install cmake face_recognition imutils scikit-learn argparse opencv-python 
-```
+    `eval "$('{Absolute path to anaconda3/Scripts/conda.exe}' 'shell.bash' 'hook')"`
+
+4. Paste following command to `~/.bashrc` and adjust the path according to your directories
+
+    `. /c/Anaconda3/etc/profile.d/conda.sh`
+
+5. Run `face-clustering.sh` with Git Bash
 
 ## encode_images.py
 
