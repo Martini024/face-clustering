@@ -27,6 +27,10 @@ The model is developed in the python language.
 
 ## Quickstart
 
+Note: Supported image file extensions are `".jpg", ".jpeg", ".png", ".bmp", ".tif", ".tiff"`
+
+If further customization is needed, modifies the `image_types` in `anaconda3/envs/face-clustering/lib/python3.10/site-packages/imutils/paths.py` accordingly
+
 ### MacOS
 
 #### Option 1: Run using Terminal

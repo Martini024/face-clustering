@@ -12,7 +12,7 @@ echo "
 echo "Note: image with many faces will prolong the recognition process, remove them if you don't wanna torture yourself"
 
 read -p "1. Where is the dataset folder (default in dataset): " dataset
-if [[ -z "$var" ]]; then
+if [[ -z "$dataset" ]]; then
    dataset="dataset"
 fi
 echo "   Target dataset folder: $dataset"
