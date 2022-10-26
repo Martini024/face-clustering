@@ -35,24 +35,28 @@ If further customization is needed, modifies the `image_types` in `anaconda3/env
 
 #### Option 1: Run using Terminal
 
-1. Restore dependencies using following commands
-
-    ```bash
-    <!-- Install Anaconda using Homebrew -->
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    brew install --cask anaconda
-    ```
+1. Follow the guide to install Anaconda on MacOS [:link:](https://docs.conda.io/projects/conda/en/latest/user-guide/install/macos.html)
+2. Restore dependencies using following commands
 
     ```bash
     <!-- Create face-clustering using Anaconda, and resolve dependencies -->
     conda create --name face-clustering
     conda install pip
-    pip install cmake face_recognition imutils scikit-learn argparse opencv-python 
+    pip install cmake
+    pip install dlib face_recognition imutils scikit-learn argparse
+    pip install opencv-python
     ```
 
-2. Check the following sections about `encode_images.py` & `cluster_faces.py` to run the clustering algorithm
+3. Check the following sections about `encode_images.py` & `cluster_faces.py` to run the clustering algorithm
 
 #### Option 2: No-brainier Command Tool
+
+Please ensure `conda` & `python` installed successfully before proceed, you can type the following command to verify
+
+```bash
+conda list
+python --version
+```
 
 To make `face-clustering.command` executable by double-clicking, run following command in terminal
 

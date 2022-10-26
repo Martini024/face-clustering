@@ -11,27 +11,21 @@ echo "\033[0;36m
 
 echo "Note: image with many faces will prolong the recognition process, \n      remove them if you don't wanna torture yourself\n"
 
+source ~/.bashrc
+
 read -p "1. Where is the dataset folder (default in dataset): " dataset
 if [[ -z "$dataset" ]]; then
    dataset="dataset"
 fi
 echo "   Target dataset folder: $dataset"
 
-read -p "2. Install Anaconda (using Homebrew): y/n " yn
-case $yn in
-    [Yy]* ) brew install --cask anaconda; break;;
-    [Nn]* ) break;;
-    * ) echo "Please answer yes or no.";;
-esac
-
 find_in_conda_env(){
     conda env list | grep "${@}" >/dev/null 2>/dev/null
 }
 
-read -p "3. Install dependencies: y/n " yn
+read -p "2. Install dependencies: y/n " yn
 case $yn in
     [Yy]* ) if find_in_conda_env ".*face-clustering.*" ; then
-                source ~/anaconda3/etc/profile.d/conda.sh
                 conda activate face-clustering
             else 
                 conda create --name face-clustering 
@@ -42,7 +36,6 @@ case $yn in
             pip install opencv-python
             ;;
     [Nn]* ) if find_in_conda_env ".*face-clustering.*" ; then
-                source ~/anaconda3/etc/profile.d/conda.sh
                 conda activate face-clustering
             else 
                 conda create --name face-clustering 
@@ -56,7 +49,7 @@ echo ""
 cd "$(dirname "$0")"
 echo "\033[0;32mStart extracting faces, please be patient...\033[0m\n"
 
-python encode_faces.py --dataset $dataset --encodings encodings.pickle
+python encode_faces.py --dataset "$dataset" --encodings encodings.pickle
 
 echo ""
 
