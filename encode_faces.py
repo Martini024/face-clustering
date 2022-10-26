@@ -56,9 +56,6 @@ for (i, imagePath) in enumerate(imagePaths):
                                             model=args["detection_method"])
 
     print("       Detected {} faces".format(len(boxes)))
-    if (len(boxes) > 15):
-        print("       \033[0;31mOMG, SO MANY FACES, MY EYES 🫠\033[0m")
-        print("       More work incoming... <_<")
     # compute the facial embedding for the face
     encodings = face_recognition.face_encodings(image, boxes)
 
