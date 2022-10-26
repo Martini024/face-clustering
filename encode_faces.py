@@ -7,6 +7,8 @@ import argparse
 import os
 # pickle to save the encodings
 import pickle
+import time
+from datetime import datetime
 
 # openCV
 import cv2
@@ -33,12 +35,14 @@ print("[INFO] quantifying faces...")
 imagePaths = list(paths.list_images(args["dataset"]))
 data = []
 
+start_time = time.time()
+
 # loop over the image paths
 for (i, imagePath) in enumerate(imagePaths):
     # load the input image and convert it from RGB (OpenCV ordering)
     # to dlib ordering (RGB)
-    print("[INFO] processing image {}/{} - {}".format(i +
-          1, len(imagePaths), imagePath))
+    print("[INFO] processing image {}/{} - {} at {}".format(i +
+          1, len(imagePaths), imagePath, datetime.now().strftime("%d/%m/%Y %H:%M:%S")))
 
     # loading image to BGR
     image = cv2.imread(imagePath)
@@ -63,6 +67,10 @@ for (i, imagePath) in enumerate(imagePaths):
     d = [{"imagePath": imagePath, "loc": box, "encoding": enc}
          for (box, enc) in zip(boxes, encodings)]
     data.extend(d)
+
+end_time = time.time()
+
+print("---Encoding faces took {} minutes ---".format((end_time - start_time) / 60))
 
 # dump the facial encodings data to disk
 print("[INFO] serializing encodings...")

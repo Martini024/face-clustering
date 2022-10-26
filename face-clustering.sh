@@ -47,7 +47,7 @@ echo ""
 cd "$(dirname "$0")"
 echo "Start extracting faces, please be patient..."
 
-python encode_faces.py --dataset $dataset --encodings encodings.pickle
+python encode_faces.py --dataset "$dataset" --encodings encodings.pickle
 
 echo ""
 

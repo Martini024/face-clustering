@@ -5,6 +5,8 @@ import argparse
 import os
 import pickle
 import shutil
+import time
+from datetime import datetime
 
 import cv2
 import numpy as np
@@ -74,6 +76,8 @@ encodings = [d["encoding"] for d in data]
 # cluster the embeddings
 print("[INFO] clustering...")
 
+start_time = time.time()
+
 # creating DBSCAN object for clustering the encodings with the metric "euclidean"
 clt = DBSCAN(metric="euclidean", n_jobs=args["jobs"])
 clt.fit(encodings)
@@ -131,3 +135,7 @@ for labelID in labelIDs:
     montageFileName = os.path.join(
         CLUSTERING_RESULT_PATH, 'summary', title + '.jpg')
     cv2.imwrite(montageFileName, montage)
+
+end_time = time.time()
+
+print("---Clustering faces took {} minutes ---".format((end_time - start_time) / 60))
